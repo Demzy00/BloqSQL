@@ -14,7 +14,7 @@ const addComment = async (req, res) => {
     console.log(req.user);
     const userId = !req.user ? null : req.user.userId;
 
-    const postCheck = "SELECT * FROM comments WHERE id=?";
+    const postCheck = "SELECT * FROM posts WHERE id=?";
     const postQuery = await query(postCheck, [postId]);
 
     if (postQuery.length === 0) {
@@ -37,4 +37,21 @@ const addComment = async (req, res) => {
   }
 };
 
-module.exports = { addComment };
+const editComment = async (req, res) => {
+  const { id } = req.params;
+  const { content } = req.body;
+
+  // check
+  const commentSql = "SELECT * FROM comments WHERE id = ?";
+  const commentQuery = await query(commentSql, [id]);
+
+  if (commentQuery === 0) {
+    return res.status(404).json({ msg: "Comment not found" });
+  } else {
+    const updateComment = "UPDATE comments SET content = ?";
+    const updateQuery = await query(updateComment, [content]);
+    return res.status(404).json(updateQuery);
+  }
+};
+
+module.exports = { addComment, editComment };

@@ -5,7 +5,13 @@ const fs = require("fs");
 const multer = require("multer");
 const path = require("path");
 
-const { createPosts, editPost } = require("../controllers/post.controller");
+const {
+  createPosts,
+  updatePostById,
+  getAllPosts,
+  getPostById,
+  deletePostById,
+} = require("../controllers/post.controller");
 const { verifyToken } = require("../middleware/authcheck");
 
 const uploadDir = "./uploads"; // Define your uploads directory path
@@ -38,5 +44,8 @@ const upload = multer({
 });
 
 router.post("/createpost", verifyToken, upload.single("image"), createPosts);
-router.post("/edit-post", verifyToken, editPost);
+router.patch("/:id", verifyToken, updatePostById);
+router.get("/getAllPost", verifyToken, getAllPosts);
+router.get("/:id", verifyToken, getPostById);
+router.delete("/:id", verifyToken, deletePostById);
 module.exports = router;

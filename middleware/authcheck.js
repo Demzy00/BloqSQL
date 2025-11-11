@@ -11,7 +11,7 @@ const verifyToken = (req, res, next) => {
     // "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyLCJlbWFpbCI6IkVIVU5hamVAZ21haWwuY29tIiwiaWF0IjoxNzYyNTk3ODY3LCJleHAiOjE3NjI2MDUwNjd9.-dlWYwcWXEpFUDM1SUaSDxZMED9d8lIbDPzrxtzdDwo",
 
     const token = req.headers.cookie.split(";")[0].split("=")[0];
-    // console.log(token);
+    console.log(token);
     if (!token) {
       //   req.user = null;
       return res
@@ -19,7 +19,7 @@ const verifyToken = (req, res, next) => {
         .json({ message: "Access Denied. No token provided." }); // No token found
     }
     const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
-    // console.log(decoded);
+    console.log(decoded);
     req.user = decoded;
     console.log("still in veri");
 

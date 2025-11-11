@@ -20,7 +20,7 @@ const getAllUsers = async (req, res) => {
 const getUserById = async (req, res) => {
   const { id } = req.params;
   try {
-    const sql = `SELECT * FROM users WHERE id = ${id}`;
+    const sql = `SELECT * FROM users WHERE id = ?`;
     const users = await query(sql, [id]);
     if (users.length === 0) {
       return res.status(404).json({ msg: "User not found" });
