@@ -3,6 +3,7 @@ const conn = require("../db.config");
 const utils = require("util");
 const query = utils.promisify(conn.query).bind(conn);
 
+
 const createPosts = async (req, res) => {
   try {
     const { title, content } = req.body;

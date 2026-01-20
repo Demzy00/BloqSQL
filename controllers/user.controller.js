@@ -30,7 +30,7 @@ const getUserById = async (req, res) => {
     return res
       .status(500)
       .json({ msg: "Server error in get user by ID", error: err.message });
-  }
+  } 
 };
 
 const updateUserById = async (req, res) => {
